@@ -30,3 +30,24 @@
 *.exe
 *.out
 *.app
+/Debug/vc143.pdb
+/Debug/vc143.idb
+/Debug/PvZ Keyboard Seed Select Mod.vcxproj.FileListAbsolute.txt
+/Debug/PvZ Keyboard Seed Select Mod.pdb
+/Debug/PvZ Keyboard Seed Select Mod.log
+/Debug/PvZ Keyboard Seed Select Mod.ilk
+/Debug/PvZ Keyboard Seed Select Mod.dll.recipe
+/Debug/keyboard.new.obj.enc
+/Debug/dllmain.obj.enc
+/Debug/PvZ Keyb.b6050d46.tlog/PvZ Keyboard Seed Select Mod.lastbuildstate
+/Debug/PvZ Keyb.b6050d46.tlog/link.write.1.tlog
+/Debug/PvZ Keyb.b6050d46.tlog/link.read.1.tlog
+/Debug/PvZ Keyb.b6050d46.tlog/link.command.1.tlog
+/Debug/PvZ Keyb.b6050d46.tlog/CL.write.1.tlog
+/Debug/PvZ Keyb.b6050d46.tlog/CL.read.1.tlog
+/Debug/PvZ Keyb.b6050d46.tlog/CL.command.1.tlog
+/.vs/PvZ Keyboard Seed Select Mod
+/PvZ Keyboard Seed Select Mod.vcxproj.user
+/PvZ Keyboard Seed Select Mod.vcxproj.filters
+/PvZ Keyboard Seed Select Mod.vcxproj
+/PvZ Keyboard Seed Select Mod.sln
