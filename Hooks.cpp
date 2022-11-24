@@ -176,7 +176,7 @@ namespace Hooks_T
 		extern Hook_Object choose_seed{{ 0x6A, 0xFF, 0x64, 0xA1, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x68, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x50, 0x64, 0x89, 0x25, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x83, 0xEC, 0x54, 0x53, 0x55, 0x8B, 0x6C, 0x24, 0x6C }}; //0x00488590
 		extern Hook_Object release_seed{{ 0x6A, 0xFF, 0x68, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x64, 0xA1, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x50, 0x64, 0x89, 0x25, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x81, 0xEC, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x85, 0xC9 }}; //0x0040FD30
 		extern Hook_Object handle_virtual_keys{{0x81, 0xF9, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x8B, 0x50, Memory::AOB_SKIP, 0x89, 0x90, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x77, 0x08, 0xC6, 0x84, 0x01, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x8B, 0x80, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP }}; //0x00539660
-		extern Hook_Object grab_tool{ 0x00411C10 }; //0x00411C10
+		extern Hook_Object grab_tool{ {0x64, 0xA1, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x6A, 0xFF, 0x68, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x50, 0x64, 0x89, 0x25, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, Memory::AOB_SKIP, 0x83, 0xEC, 0x20,} }; //0x00411C10
 
 	}
 
