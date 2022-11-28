@@ -8,7 +8,7 @@ namespace Keyboard_Storages
 
 	namespace Utils
 	{
-		void initialize_heys_storages();
+		void initialize_keys_storages();
 
 		void initialize_keys_from_config(Keyboard_VK_ID& keys_storage,const std::string& branch_name);
 

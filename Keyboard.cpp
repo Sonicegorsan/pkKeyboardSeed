@@ -42,7 +42,7 @@ namespace Keyboard_Storages
 			}
 		}
 
-		void initialize_heys_storages()
+		void initialize_keys_storages()
 		{
 
 			Keyboard_Storages::Utils::initialize_keys_from_config(Keyboard_Storages::Seeds::seed_keys, Keyboard_Storages::Seeds::Strings::MAIN_GAME_SEGMENT);
