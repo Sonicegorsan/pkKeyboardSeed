@@ -30,6 +30,123 @@ namespace Addition_Levels_ID {
 	};
 };
 
+namespace Tools
+{
+	enum Tool
+	{
+		SHOVEL = 0x5,
+		WATERING_CAN = 0x6,
+		FERTILIZER = 0x7,
+		BUG_SPRAY = 0x8,
+		MUSIC_PLAYER = 0x9,
+		CHOCOLATE = 0xA,
+		MOVE_POT = 0xB,
+		SELL_PLANT = 0xC,
+		CART = 0xD,
+		WISDOM_TREE_FOOD = 0xE,
+	};
+
+}
+namespace Objects
+{
+	enum Object
+	{
+		SEED_PACKET = 0x1,
+		SHOVEL = 0x6,
+		COB_CANNON_HOMING = 0x8,
+		WATERING_CAN = 0x9,
+		FERTILIZER = 0xA,
+		BUG_SPRAY = 0xB,
+		MUSIC_PLAYER = 0xC,
+		CHOCOLATE = 0xD,
+		MOVE_POT = 0xE,
+		SELL_PLANT = 0xF,
+		CART = 0x10,
+		WISDOM_TREE_FOOD = 0x11,
+	};
+
+	Tools::Tool get_tool_from_object(Object object);
+}
+
+struct Main_Class;
+struct Game;
+struct Game_Field;
+struct Seed_Packet;
+struct Seed_Packet_Storage;
+struct User_Profile;
+struct Window_Widget;
+
+struct __declspec(align(4)) Main_Class
+{
+	int unknown[200];
+	Window_Widget* window_widget;
+	int unknown1[273];
+	Game* game;
+	int unknown2[35];
+	int additional_levels_id;
+	int unknown3[12];
+	User_Profile* user_profile;
+};
+
+struct Game
+{
+	int unknown[11];
+	int paused;
+	int draw_field_y_alignment;
+	int draw_field_x_alignment;
+	int clickable_plane_x;
+	int clickable_plane_y;
+	int unknown2[19];
+	Main_Class* main_class;
+	int unknown3[42];
+	Game_Field* game_field;
+	int unknown4[2];
+	Seed_Packet_Storage* seed_packet_storage;
+	int unknown5[7];
+	int bIsGamePaused;
+	int unknown6[5374];
+	int sun_amount;
+	int flags_amount;
+	int unknown7[7];
+	int tutorial_phase;
+	bool unknown8[105];
+	bool shovel_present;
+};
+
+
+struct Seed_Packet
+{
+	Main_Class* main_class;
+	Game* parent_things;
+	int seed_slot_offset_x;
+	int seed_slot_offset_y;
+	int clickable_matrix_x;
+	int clickable_matrix_y;
+	int isPresent;
+	int unknown[2];
+	int recharge_counter;
+	int recharge_time;
+	int slot_index;
+	int seed_icon_offset_for_conveyor;
+	int plant_id;
+	int imitated_plant_id;
+	int activate_slot_machine_switch;
+	int to_which_plant_switch;
+	int unknown1;
+	bool recharged;
+	bool rechargeble;
+	bool unknown2;
+	bool unknown3;
+	int how_many_times_used;
+
+};
+
+struct Seed_Packet_Storage
+{
+	int unknown[10];
+	Seed_Packet seed_packet[10];
+};
+
 
 struct Game_Field
 {
@@ -54,39 +171,21 @@ struct User_Profile
 };
 
 
-struct Game_Params
+struct Window_Widget
 {
-	DWORD unknown[510];
-	int additional_levels_id;
-	int unknown1[12];
-	User_Profile* user_profile;
+	int unknown[23];
+	Main_Class* main_class;
+	int unknown1[11];
+	int* active_window_ptr;
+	int unknown2[20];
+	int window_x_mouse;
+	int window_y_mouse;
+	int mouse_click_type1;
+	int mouse_click_type2;
 };
 
 
-struct Game
-{
-	int unknown[35];
-	Game_Params* game_params;
-	int unknown1[42];
-	Game_Field* game_field;
-	int unknown2[10];
-	int bIsGamePaused;
-	int unknown3[5414];
-	int sun_amount;
-	int flags_amount;
-};
 
 
-struct Seed_Packet_Vtable
-{
-	int unknown[517];
-	int bFreePlantingHack;
-};
-
-struct __declspec(align(4)) Seed_packet
-{
-	Seed_Packet_Vtable* vtable;
-	Game* game;
-};
 
 #endif // !IDA_STUFF_H

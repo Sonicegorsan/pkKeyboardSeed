@@ -1,6 +1,6 @@
 #include "Hooks.h"
 #include "Keyboard.h"
-void __declspec(naked) __stdcall grab_tool_wrapper(int object_type, Game* game)
+void __declspec(naked) grab_tool_wrapper(Tools::Tool tool, Game* game)
 {
 	__asm {
 		push        ebp
@@ -13,8 +13,7 @@ void __declspec(naked) __stdcall grab_tool_wrapper(int object_type, Game* game)
 		push esi
 		push edi
 		mov ebx, game
-		mov edx, object_type
-		sub edx, 3
+		mov edx, tool
 		call Hooks_T::Addresses::grab_tool.address
 		pop edi
 		pop esi
@@ -28,44 +27,43 @@ void __declspec(naked) __stdcall grab_tool_wrapper(int object_type, Game* game)
 	}
 }
 
-void __cdecl handle_virtual_keys_hook(unsigned int VK_Key)
+void handle_virtual_keys_hook(unsigned int VK_Key,Main_Class* main_class)
 {
 	using namespace Keyboard_Storages;
 
-	Seed_packet* tmp = ((Seed_packet*)Memory::dereference_multilevel_pointer((uintptr_t*)(Hooks_T::Addresses::module_base + 0x002A71A8), { 0x68,0x768,0x144,0x28 }));
-	Game* game = ((tmp != nullptr) ? tmp->game : nullptr);
-	if (game == nullptr or game->bIsGamePaused == 1)
+	if (main_class->game == nullptr or main_class->game->bIsGamePaused == 1)
 		goto end;
-	switch (game->game_params->additional_levels_id)
+	switch (main_class->additional_levels_id)
 	{
 	case Addition_Levels_ID::Zen_Garden:
 	{
 		int action{ Utils::get_action_id(Utils::get_vk_action_name(Zen_Garden::zen_garden_keys, VK_Key)) };
 		if (action != -1)
-			grab_tool_wrapper(action, game);
+			grab_tool_wrapper((Tools::Tool)action, main_class->game);
 		break;
 	}
 	case Addition_Levels_ID::Wisdom_Tree:
 	{
 		int action{ Utils::get_action_id(Utils::get_vk_action_name(Wisdom_Tree::wisdom_tree_keys, VK_Key)) };
 		if (action != -1)
-			grab_tool_wrapper(action, game);
+			grab_tool_wrapper((Tools::Tool)action, main_class->game);
 		break;
 	}
 	default:
 		const std::string& action_name{ Utils::get_vk_action_name(Seeds::seed_keys,VK_Key) };
-		if (game->game_field->HoldingObjectType_or_isHoldingSmth != 0)
-			((Hooks_T::Release_Seed_Function)Hooks_T::Addresses::release_seed.address)(-1, 0, game, 0, 0); // Drops the packet so the previosly selected seed packet could be reset to it's original state
+		if (main_class->game->game_field->HoldingObjectType_or_isHoldingSmth != 0)
+			((Hooks_T::Release_Seed_Function)Hooks_T::Addresses::release_seed.address)(-1, 0, main_class->game, 0, 0); // Drops the packet so the previosly selected seed packet could be reset to it's original state
 
-		if (action_name == Seeds::Strings::SHOVEL)
-			grab_tool_wrapper(Map_Keys::Tools::SHOVEL + 2, game); // there is ingame enums typecast, so in their enum shovel == 5
-		else
+		if (action_name == Seeds::Strings::SHOVEL and main_class->game->shovel_present)
+		{
+			grab_tool_wrapper(Tools::SHOVEL, main_class->game);
+			goto end;
+		}
+		if (action_name != Seeds::Strings::SHOVEL and action_name != "NULL")
 		{
 			unsigned int offset{ Utils::get_index_of_vk(Seeds::seed_keys, VK_Key) };
 			if (offset == -1) break;
-			Seed_packet* seed_slot_address = (Seed_packet*)Memory::dereference_multilevel_pointer((uintptr_t*)(Hooks_T::Addresses::module_base + 0x002A71A8), { 0x68,0x768,0x144,0x28 + 0x50 * offset });
-			if (seed_slot_address != nullptr and seed_slot_address->game->bIsGamePaused != 1)
-				((Hooks_T::Choose_Seed_Function)Hooks_T::Addresses::choose_seed.address)((DWORD*)seed_slot_address);
+			((Hooks_T::Choose_Seed_Function)Hooks_T::Addresses::choose_seed.address)((DWORD*)&main_class->game->seed_packet_storage->seed_packet[offset]);
 		}
 		break;
 	}
@@ -77,15 +75,13 @@ void __cdecl handle_virtual_keys_hook(unsigned int VK_Key)
 void __declspec(naked) handle_virtual_keys_hook_wrapper()
 {
 	__asm {
-		xchg eax, ecx
-		push ecx
-		push edx
-		push eax
+		push eax //Saving eax (it will be overwritten even despite the fact that this is a void function)
+		push ebx //main class pointer
+		push ecx //ecx contain Virtual key in hookable function
 		call handle_virtual_keys_hook
-		pop eax
-		pop edx
 		pop ecx
-		xchg eax, ecx
+		pop ebx
+		pop eax
 		call Hooks_T::Addresses::handle_virtual_keys.address
 		ret
 	}

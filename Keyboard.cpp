@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <algorithm>
+#include "IDA_Stuff.h"
 #include "Keyboard.h"
 #include "Filesystem.h"
 
@@ -103,23 +104,23 @@ namespace Keyboard_Storages
 		int get_action_id(const std::string& action_name)
 		{
 			if (action_name == Zen_Garden::Strings::WATERING_CAN)
-				return Map_Keys::Tools::WATERING_CAN;
+				return Tools::WATERING_CAN;
 			if (action_name == Zen_Garden::Strings::FERTILIZER)
-				return Map_Keys::Tools::FERTILIZER;
+				return Tools::FERTILIZER;
 			if (action_name == Zen_Garden::Strings::BUG_SPRAY)
-				return Map_Keys::Tools::BUG_SPRAY;
+				return Tools::BUG_SPRAY;
 			if (action_name == Zen_Garden::Strings::MUSIC_PLAYER)
-				return Map_Keys::Tools::MUSIC_PLAYER;
+				return Tools::MUSIC_PLAYER;
 			if (action_name == Zen_Garden::Strings::CHOCOLATE)
-				return Map_Keys::Tools::CHOCOLATE;
+				return Tools::CHOCOLATE;
 			if (action_name == Zen_Garden::Strings::MOVE_POT)
-				return Map_Keys::Tools::MOVE_POT;
+				return Tools::MOVE_POT;
 			if (action_name == Zen_Garden::Strings::SELL_PLANT)
-				return Map_Keys::Tools::SELL_PLANT;
+				return Tools::SELL_PLANT;
 			if (action_name == Zen_Garden::Strings::CART)
-				return Map_Keys::Tools::CART;
+				return Tools::CART;
 			if (action_name == Wisdom_Tree::Strings::WISDOM_TREE_FOOD)
-				return Map_Keys::Tools::WISDOM_TREE_FOOD;
+				return Tools::WISDOM_TREE_FOOD;
 			return -1;
 		}
 	}

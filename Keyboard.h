@@ -88,22 +88,6 @@ namespace Keyboard_Storages
 				SEED_SLOT_10,
 			};
 		}
-		namespace Tools
-		{
-			enum Tools
-			{
-				SHOVEL = 6,
-				WATERING_CAN = 9,
-				FERTILIZER = 10,
-				BUG_SPRAY = 11,
-				MUSIC_PLAYER = 12,
-				CHOCOLATE = 13,
-				MOVE_POT = 14,
-				SELL_PLANT = 15,
-				CART = 16,
-				WISDOM_TREE_FOOD = 17,
-			};
-		}
 	}
 
 }
